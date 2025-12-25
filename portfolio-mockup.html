@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Design Mockup - Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0a0e17;
+            color: #e4e4e7;
+            overflow-x: hidden;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #1a1f2e;
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 30%;
+            background: linear-gradient(90deg, #00ff9f, #00e0ff);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 159, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e4e4e7;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 4px 0;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #00ff9f;
+        }
+
+        .nav a .num {
+            color: #00ff9f;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(#00ff9f 1px, transparent 1px),
+                linear-gradient(90deg, #00ff9f 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .terminal-window {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 255, 159, 0.3);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0, 255, 159, 0.1);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #00ff9f;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .terminal-path {
+            margin-left: auto;
+            opacity: 0.5;
+        }
+
+        .terminal-prompt {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+
+        .cursor {
+            width: 8px;
+            height: 20px;
+            background: #00ff9f;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .terminal-content {
+            padding-left: 16px;
+            border-left: 2px solid rgba(0, 255, 159, 0.3);
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .name {
+            color: #00ff9f;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #9ca3af;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 32px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 12px 24px;
+            background: #00ff9f;
+            color: #0a0e17;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #00e0ff;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 255, 159, 0.5);
+        }
+
+        .btn-secondary {
+            padding: 12px 24px;
+            border: 1px solid #00ff9f;
+            color: #00ff9f;
+            background: transparent;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 159, 0.1);
+        }
+
+        .chevron {
+            text-align: center;
+            margin-top: 48px;
+            color: #00ff9f;
+            font-size: 32px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 96px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .section-num {
+            color: #00ff9f;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0, 255, 159, 0.5), transparent);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: #0f1419;
+            border: 1px solid #1a1f2e;
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            border-color: rgba(0, 255, 159, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 255, 159, 0.1);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .project-icon {
+            color: #00ff9f;
+            font-size: 24px;
+        }
+
+        .project-link {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: #00ff9f;
+        }
+
+        .project-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            transition: color 0.3s;
+        }
+
+        .project-card:hover h3 {
+            color: #00ff9f;
+        }
+
+        .project-card p {
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tech-tag {
+            padding: 4px 12px;
+            background: rgba(0, 255, 159, 0.1);
+            border: 1px solid rgba(0, 255, 159, 0.2);
+            color: #00ff9f;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .project-metric {
+            color: #00e0ff;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: #0a0e17;
+            border: 1px solid #1a1f2e;
+            border-radius: 8px;
+            padding: 24px;
+            transition: border-color 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(0, 255, 159, 0.3);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .skill-header h3 {
+            color: #00ff9f;
+            font-size: 18px;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-item {
+            padding: 6px 12px;
+            background: #1a1f2e;
+            color: #e4e4e7;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-item:hover {
+            background: rgba(0, 255, 159, 0.1);
+            color: #00ff9f;
+        }
+
+        /* Experience Cards */
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .exp-card {
+            background: #0f1419;
+            border: 1px solid #1a1f2e;
+            border-radius: 8px;
+            padding: 32px;
+            transition: border-color 0.3s;
+        }
+
+        .exp-card:hover {
+            border-color: rgba(0, 255, 159, 0.3);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .exp-card h3 {
+            font-size: 24px;
+            color: #00ff9f;
+            margin-bottom: 4px;
+        }
+
+        .exp-company {
+            font-size: 18px;
+            color: #e4e4e7;
+        }
+
+        .exp-period {
+            color: #9ca3af;
+        }
+
+        .exp-card ul {
+            list-style: none;
+            padding-left: 16px;
+        }
+
+        .exp-card li {
+            color: #9ca3af;
+            line-height: 1.8;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .exp-card li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #00ff9f;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            font-size: 20px;
+            color: #9ca3af;
+            max-width: 700px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .footer {
+            padding-top: 32px;
+            border-top: 1px solid #1a1f2e;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* Alternating backgrounds */
+        .bg-alt {
+            background: rgba(15, 20, 25, 0.5);
+        }
+
+        /* Icons (simplified) */
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 40px; }
+            .hero p { font-size: 16px; }
+            .section-title { font-size: 28px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .nav { top: 16px; right: 16px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#hero"><span class="num">01</span> _init</a>
+        <a href="#projects"><span class="num">02</span> _projects</a>
+        <a href="#skills"><span class="num">03</span> _skills</a>
+        <a href="#experience"><span class="num">04</span> _experience</a>
+        <a href="#contact"><span class="num">05</span> _contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="grid-bg"></div>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span>◉</span>
+                <span>~/portfolio</span>
+                <span class="terminal-path">bash</span>
+            </div>
+            
+            <div class="terminal-prompt">
+                <span style="color: #00ff9f;">$</span>
+                <span>> whoami</span>
+                <div class="cursor"></div>
+            </div>
+
+            <div class="terminal-content">
+                <h1>
+                    <span class="name">Your Name</span><br>
+                    <span>Software Engineer</span>
+                </h1>
+                
+                <p>
+                    4th year CS student crafting scalable systems and elegant code. 
+                    Passionate about distributed systems, cloud architecture, and building 
+                    products that solve real problems.
+                </p>
+
+                <div class="btn-group">
+                    <a href="#projects" class="btn-primary">View Projects →</a>
+                    <a href="#contact" class="btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+        <div class="chevron">↓</div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-icon">&lt;/&gt;</span>
+                    <a href="#" class="project-link">↗</a>
+                </div>
+                <h3>Distributed Task Queue</h3>
+                <p>High-performance task queue with worker pools and priority scheduling</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Go</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+                <div class="project-metric">⚡ 99.9% uptime, processes 10k+ jobs/hour</div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-icon">&lt;/&gt;</span>
+                    <a href="#" class="project-link">↗</a>
+                </div>
+                <h3>Real-time Collaboration Platform</h3>
+                <p>Collaborative code editor with live cursors and operational transforms</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">WebSocket</span>
+                    <span class="tech-tag">Node.js</span>
+                </div>
+                <div class="project-metric">⚡ Sub-50ms latency, 500+ concurrent users</div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-icon">&lt;/&gt;</span>
+                    <a href="#" class="project-link">↗</a>
+                </div>
+                <h3>ML Pipeline Orchestrator</h3>
+                <p>Automated ML training pipeline with experiment tracking and model versioning</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">TensorFlow</span>
+                </div>
+                <div class="project-metric">⚡ Reduced training time by 60%</div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-icon">&lt;/&gt;</span>
+                    <a href="#" class="project-link">↗</a>
+                </div>
+                <h3>API Gateway & Service Mesh</h3>
+                <p>Low-latency API gateway with rate limiting, caching, and circuit breaking</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Rust</span>
+                    <span class="tech-tag">gRPC</span>
+                    <span class="tech-tag">Envoy</span>
+                </div>
+                <div class="project-metric">⚡ &lt;5ms p99 latency</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-alt">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <h2 class="section-title">Technical Stack</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span style="color: #00ff9f;">⌥</span>
+                    <h3>Languages</h3>
+                </div>
+                <div class="skill-items">
+                    <span class="skill-item">TypeScript</span>
+                    <span class="skill-item">Python</span>
+                    <span class="skill-item">Go</span>
+                    <span class="skill-item">Rust</span>
+                    <span class="skill-item">Java</span>
+                    <span class="skill-item">C++</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span style="color: #00ff9f;">⌥</span>
+                    <h3>Frontend</h3>
+                </div>
+                <div class="skill-items">
+                    <span class="skill-item">React</span>
+                    <span class="skill-item">Next.js</span>
+                    <span class="skill-item">Vue</span>
+                    <span class="skill-item">Tailwind</span>
+                    <span class="skill-item">WebGL</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span style="color: #00ff9f;">⌥</span>
+                    <h3>Backend</h3>
+                </div>
+                <div class="skill-items">
+                    <span class="skill-item">Node.js</span>
+                    <span class="skill-item">Django</span>
+                    <span class="skill-item">FastAPI</span>
+                    <span class="skill-item">PostgreSQL</span>
+                    <span class="skill-item">Redis</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span style="color: #00ff9f;">⌥</span>
+                    <h3>DevOps</h3>
+                </div>
+                <div class="skill-items">
+                    <span class="skill-item">Docker</span>
+                    <span class="skill-item">Kubernetes</span>
+                    <span class="skill-item">AWS</span>
+                    <span class="skill-item">CI/CD</span>
+                    <span class="skill-item">Terraform</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span style="color: #00ff9f;">⌥</span>
+                    <h3>Tools</h3>
+                </div>
+                <div class="skill-items">
+                    <span class="skill-item">Git</span>
+                    <span class="skill-item">Linux</span>
+                    <span class="skill-item">Vim</span>
+                    <span class="skill-item">Figma</span>
+                    <span class="skill-item">Postman</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-header">
+            <span class="section-num">04</span>
+            <h2 class="section-title">Work Experience</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="experience-list">
+            <div class="exp-card">
+                <div class="exp-header">
+                    <div>
+                        <h3>Software Engineering Intern</h3>
+                        <div class="exp-company">Tech Company</div>
+                    </div>
+                    <div class="exp-period">Summer 2024</div>
+                </div>
+                <ul>
+                    <li>Built microservices handling 1M+ requests/day</li>
+                    <li>Reduced API response time by 40%</li>
+                    <li>Led migration to TypeScript</li>
+                </ul>
+            </div>
+
+            <div class="exp-card">
+                <div class="exp-header">
+                    <div>
+                        <h3>Backend Developer</h3>
+                        <div class="exp-company">Startup Inc</div>
+                    </div>
+                    <div class="exp-period">2023 - 2024</div>
+                </div>
+                <ul>
+                    <li>Architected serverless data pipeline</li>
+                    <li>Implemented CI/CD reducing deploy time 70%</li>
+                    <li>Mentored 3 junior developers</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact bg-alt">
+        <div class="section-header" style="justify-content: center;">
+            <span class="section-num">05</span>
+            <h2 class="section-title">Get In Touch</h2>
+        </div>
+
+        <p>
+            I'm currently looking for new opportunities and interesting projects. 
+            Whether you have a question or just want to say hi, feel free to reach out!
+        </p>
+
+        <div class="contact-links">
+            <a href="mailto:your.email@example.com" class="btn-primary">📧 Email Me</a>
+            <a href="https://github.com" class="btn-secondary">GitHub</a>
+            <a href="https://linkedin.com" class="btn-secondary">LinkedIn</a>
+        </div>
+
+        <div class="footer">
+            Built with React • Hosted on GitHub Pages • © 2024
+        </div>
+    </section>
+
+</body>
+</html>
