@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+
 export default function Portfolio() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
