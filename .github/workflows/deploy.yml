@@ -20,7 +20,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' # Change this to 'dist' or 'build' if you use React/Vue
+          path: './dist' # React/Vue
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
