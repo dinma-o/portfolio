@@ -457,6 +457,7 @@ export default function Portfolio() {
             </a>
           </div>
 
+
           <div style={{ paddingTop: '32px', borderTop: '1px solid #1a1f2e' }}>
             <p style={{ fontSize: '14px', color: '#9ca3af' }}>
               Built with React & Tailwind • Edmonton, AB • © 2025
