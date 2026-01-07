@@ -47,9 +47,9 @@ npm run deploy
 
 - **Email:** obiokoye@ualberta.ca
 - **LinkedIn:** [chidinma-obi-okoye](https://www.linkedin.com/in/chidinma-obi-okoye-4436002a0/)
-- **GitHub:** [dinma-o](https://github.com/dinma-o)
-
+- **GitHub:** [dinma-o](https://github.com/Airstrip123)
 ---
 
 © 2025 Chidinma Obi-Okoye
+
 

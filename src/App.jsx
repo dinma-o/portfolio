@@ -449,7 +449,7 @@ export default function Portfolio() {
             <a href="mailto:obiokoye@ualberta.ca" style={primaryBtnStyle}>
               📧 Email Me
             </a>
-            <a href="https://github.com/dinma-o" style={secondaryBtnStyle} target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Airstrip123" style={secondaryBtnStyle} target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
             <a href="https://www.linkedin.com/in/chidinma-obi-okoye-4436002a0/" style={secondaryBtnStyle} target="_blank" rel="noopener noreferrer">
